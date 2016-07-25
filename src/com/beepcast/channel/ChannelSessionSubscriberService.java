@@ -1,0 +1,67 @@
+package com.beepcast.channel;
+
+import com.beepcast.oproperties.OnlinePropertiesApp;
+import com.firsthop.common.log.DLogContext;
+import com.firsthop.common.log.SimpleContext;
+
+public class ChannelSessionSubscriberService {
+
+  // ////////////////////////////////////////////////////////////////////////////
+  //
+  // Constanta
+  //
+  // ////////////////////////////////////////////////////////////////////////////
+
+  static final DLogContext lctx = new SimpleContext(
+      "ChannelSessionSubscriberService" );
+
+  // ////////////////////////////////////////////////////////////////////////////
+  //
+  // Data Member
+  //
+  // ////////////////////////////////////////////////////////////////////////////
+
+  private OnlinePropertiesApp opropsApp;
+  private ChannelApp app;
+  private ChannelSessionSubscriberDAO dao;
+
+  // ////////////////////////////////////////////////////////////////////////////
+  //
+  // Constructor
+  //
+  // ////////////////////////////////////////////////////////////////////////////
+
+  public ChannelSessionSubscriberService() {
+    opropsApp = OnlinePropertiesApp.getInstance();
+    app = ChannelApp.getInstance();
+    dao = new ChannelSessionSubscriberDAO();
+  }
+
+  // ////////////////////////////////////////////////////////////////////////////
+  //
+  // Support Function
+  //
+  // ////////////////////////////////////////////////////////////////////////////
+
+  public int insertUnprocessedNumbers( int channelSessionId , int eventId ) {
+    int totalRecords = 0;
+    if ( channelSessionId < 1 ) {
+      return totalRecords;
+    }
+    if ( eventId < 1 ) {
+      return totalRecords;
+    }
+    totalRecords = dao.insertUnprocessedNumbers( app.isDebug() ,
+        channelSessionId , eventId );
+    return totalRecords;
+  }
+
+  // ////////////////////////////////////////////////////////////////////////////
+  //
+  // Core Function
+  //
+  // ////////////////////////////////////////////////////////////////////////////
+
+  // ...
+
+}
